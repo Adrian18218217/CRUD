@@ -3,6 +3,7 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import java.sql.*;
 
 public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -49,42 +50,78 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <head>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
       out.write("        <link href=\"css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\"/>     \n");
-      out.write("        <title>JSP Page</title>\n");
+      out.write("        <title>Register</title>\n");
       out.write("    </head>\n");
       out.write("    <body style=\"margin-top: 30px\">      \n");
-      out.write("        \n");
+      out.write("\n");
+      out.write("        ");
+
+            Connection cnx = null;
+            Statement sta = null;
+            ResultSet rs = null;
+
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                cnx = DriverManager.getConnection("jdbc:mysql://localhost/bd_practica?user=root&password=");
+
+                sta = cnx.createStatement();
+                rs = sta.executeQuery("select * from persona");
+
+                while (rs.next()) {
+        
+      out.write("\n");
+      out.write("\n");
       out.write("        <div class=\"container\">            \n");
       out.write("            <button type=\"button\" class=\"btn btn-success btn-lg\" data-toggle=\"modal\" data-target=\"#myModal\"> Agregar Nuevo</button>\n");
-      out.write("             </div>  \n");
-      out.write("              \n");
+      out.write("        </div>  \n");
+      out.write("\n");
       out.write("        <br>\n");
       out.write("        <div class=\"container\">               \n");
-      out.write("                  \n");
-      out.write("             <table class=\"table table-bordered\"  id=\"tablaDatos\">\n");
-      out.write("                    <thead>\n");
-      out.write("                        <tr>\n");
-      out.write("                            <th class=\"text-center\">Id</th>\n");
-      out.write("                            <th>Nombres</th>\n");
-      out.write("                            <th class=\"text-center\">DNI</th>\n");
-      out.write("                            <th class=\"text-center\">Acciones</th>\n");
-      out.write("                        </tr>\n");
-      out.write("                    </thead>\n");
-      out.write("                    <tbody id=\"tbodys\">\n");
-      out.write("                       \n");
-      out.write("                        <tr>\n");
-      out.write("                            <td class=\"text-center\"><j></td>\n");
-      out.write("                            <td><j></td>\n");
-      out.write("                            <td class=\"text-center\"><j></td>\n");
-      out.write("                            <td class=\"text-center\">\n");
-      out.write("                                \n");
-      out.write("                               \n");
-      out.write("                                <a href=\"Editar.html\" class=\"btn btn-primary\">Editar</a>\n");
-      out.write("                                <a href=\"Delete.html\" class=\"btn btn-danger\">Delete</a>\n");
-      out.write("                            </td>\n");
-      out.write("                        </tr>\n");
-      out.write("                        \n");
-      out.write("                </table>\n");
-      out.write("            </div>        \n");
+      out.write("\n");
+      out.write("            <table class=\"table table-bordered\"  id=\"tablaDatos\">\n");
+      out.write("                <thead>\n");
+      out.write("                    <tr>\n");
+      out.write("                        <th class=\"text-center\">Id</th>\n");
+      out.write("                        <th>Nombres</th>\n");
+      out.write("                        <th class=\"text-center\">DNI</th>\n");
+      out.write("                        <th class=\"text-center\">Acciones</th>\n");
+      out.write("                    </tr>\n");
+      out.write("                </thead>\n");
+      out.write("                <tbody id=\"tbodys\">\n");
+      out.write("\n");
+      out.write("                    <tr>\n");
+      out.write("\n");
+      out.write("                        <td class=\"text-center\">");
+      out.print( rs.getInt(1));
+      out.write("</td>\n");
+      out.write("                        <td>");
+      out.print( rs.getString(2));
+      out.write("</td>\n");
+      out.write("                        <td class=\"text-center\">");
+      out.print( rs.getString(3));
+      out.write("</td>\n");
+      out.write("\n");
+      out.write("                        <td class=\"text-center\">\n");
+      out.write("\n");
+      out.write("                            <a href=\"Editar.jsp?id=<>\" class=\"btn btn-primary\">Editar</a>\n");
+      out.write("                            <a href=\"Delete.jsp?id=<>\" class=\"btn btn-danger\">Delete</a>\n");
+      out.write("                        </td>\n");
+      out.write("                    </tr>\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("                    ");
+
+                            }
+                            sta.close();
+                            rs.close();
+                            cnx.close();
+                        } catch (Exception e) {
+
+                        }
+                    
+      out.write("\n");
+      out.write("            </table>\n");
+      out.write("        </div>        \n");
       out.write("        <div class=\"container\">          \n");
       out.write("            <div class=\"modal fade\" id=\"myModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n");
       out.write("                <div class=\"modal-dialog\" role=\"document\" style=\"z-index: 9999; width: 450px\">\n");
@@ -107,7 +144,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    </div>                    \n");
       out.write("                </div>\n");
       out.write("            </div>\n");
-      out.write("           \n");
+      out.write("\n");
       out.write("        </div>        \n");
       out.write("        <script src=\"js/jquery.js\" type=\"text/javascript\"></script>             \n");
       out.write("        <script src=\"js/bootstrap.min.js\" type=\"text/javascript\"></script>        \n");
